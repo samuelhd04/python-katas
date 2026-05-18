@@ -1,11 +1,19 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from src.kata1_dictionary import Dictionary
 from src.kata2_spending import get_total
 from src.kata3_nth_letter import nth_letter
 
 app = FastAPI()
 dictionary = Dictionary()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+@app.get("/")
+def root():
+    return FileResponse("static/index.html")
 
 
 @app.get("/dictionary/{word}")

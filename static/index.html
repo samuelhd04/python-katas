@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Python Katas</title>
+    </head>
+    <body>
+        <h1>Python Katas</h1>
+
+        <h2>Dictionary</h2>
+        <input id="newWord" placeholder="Word" />
+        <input id="newDef" placeholder="Definition" />
+        <button onclick="addEntry()">Add</button>
+        <input id="searchWord" placeholder="Search" />
+        <button onclick="lookWord()">Look up</button>
+        <p id="dictResult"></p>
+
+        <h2>Spending</h2>
+        <input id="items" placeholder="socks,shoes" />
+        <input id="tax" placeholder="0.09" />
+        <button onclick="calcSpending()">Calculate</button>
+        <p id="spendingResult"></p>
+
+        <h2>Nth Letter</h2>
+        <input id="words" placeholder="yoda,best,has" />
+        <button onclick="calcNth()">Concatenate</button>
+        <p id="nthResult"></p>
+
+        <script>
+            const base = window.location.origin;
+
+            async function addEntry() {
+                const word = document.getElementById("newWord").value;
+                const def = document.getElementById("newDef").value;
+                await fetch(`${base}/dictionary/${word}?definition=${def}`, {
+                    method: "POST",
+                });
+                document.getElementById("dictResult").innerText =
+                    `Entry added for ${word}`;
+            }
+
+            async function lookWord() {
+                const word = document.getElementById("searchWord").value;
+                const res = await fetch(`${base}/dictionary/${word}`);
+                const data = await res.json();
+                document.getElementById("dictResult").innerText = data.result;
+            }
+
+            async function calcSpending() {
+                const items = document.getElementById("items").value;
+                const tax = document.getElementById("tax").value;
+                const res = await fetch(`${base}/spending?items=${items}&tax=${tax}`);
+                const data = await res.json();
+                document.getElementById("spendingResult").innerText =
+                    `Total: $${data.result}`;
+            }
+
+            async function calcNth() {
+                const words = document.getElementById("words").value;
+                const res = await fetch(`${base}/nth-letter?words=${words}`);
+                const data = await res.json();
+                document.getElementById("nthResult").innerText = `Result: ${data.result}`;
+            }
+        </script>
+    </body>
+</html>
