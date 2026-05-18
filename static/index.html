@@ -15,6 +15,7 @@
         <p id="dictResult"></p>
 
         <h2>Spending</h2>
+        <input id="costs" placeholder="socks:5,shoes:60,sweater:30" />
         <input id="items" placeholder="socks,shoes" />
         <input id="tax" placeholder="0.09" />
         <button onclick="calcSpending()">Calculate</button>
@@ -46,9 +47,12 @@
             }
 
             async function calcSpending() {
+                const costs = document.getElementById("costs").value;
                 const items = document.getElementById("items").value;
                 const tax = document.getElementById("tax").value;
-                const res = await fetch(`${base}/spending?items=${items}&tax=${tax}`);
+                const res = await fetch(
+                    `${base}/spending?items=${items}&costs=${costs}&tax=${tax}`,
+                );
                 const data = await res.json();
                 document.getElementById("spendingResult").innerText =
                     `Total: $${data.result}`;

@@ -28,10 +28,13 @@ def newentry(word: str, definition: str):
 
 
 @app.get("/spending")
-def spending(items: str, tax: float):
-    costs = {"socks": 5, "shoes": 60, "sweater": 30}
+def spending(items: str, costs: str, tax: float):
+    costs_dict = {}
+    for pair in costs.split(","):
+        name, price = pair.split(":")
+        costs_dict[name] = float(price)
     items_list = items.split(",")
-    return {"result": get_total(costs, items_list, tax)}
+    return {"result": get_total(costs_dict, items_list, tax)}
 
 
 @app.get("/nth-letter")
