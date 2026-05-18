@@ -1,19 +1,11 @@
-Three Python katas solved and tested with pytest, containerized with Docker, and automated with GitHub Actions.
+# Python Katas
 
-## Run locally
+Three Python katas solved and tested with pytest, containerized with Docker, deployed on Render, and automated with GitHub Actions.
 
-```bash
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-pytest tests/ -v
-```
+## CI/CD
 
-## Run with Docker
+Every push to `main` automatically runs tests inside a Docker container via GitHub Actions. If tests pass, the app is deployed to Render.
 
-```bash
-docker build -t python-katas .
-docker run python-katas
-```
+## Live
 
-Every push to `main` automatically builds the Docker image and runs all tests via GitHub Actions.
+[python-katas.onrender.com](https://python-katas.onrender.com/)
