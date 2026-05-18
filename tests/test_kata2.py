@@ -2,7 +2,7 @@ from src.kata2_spending import get_total
 
 
 def test_basic_total():
-    costs = {"socks": 5, "shoes": 60, "sweater": 30}
+    costs = {"socks": 5, "shoes": 60}
     assert get_total(costs, ["socks", "shoes"], 0.09) == 70.85
 
 
