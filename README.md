@@ -1,5 +1,3 @@
-# Python Katas
-
 Three Python katas solved and tested with pytest, containerized with Docker, and automated with GitHub Actions.
 
 ## Run locally
